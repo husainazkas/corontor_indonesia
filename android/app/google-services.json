@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "735472462483",
+    "project_id": "corona-monitor-indonesia",
+    "storage_bucket": "corona-monitor-indonesia.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:735472462483:android:846137f5274d1b7a42bb66",
+        "android_client_info": {
+          "package_name": "com.husainazkas.corontor_indonesia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "735472462483-jenmd2uod1nc2lh6kfuf0b1o5c6plukk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQqEJpYGBRYqHF8WMcQ3upNCyuOph8suI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "735472462483-jenmd2uod1nc2lh6kfuf0b1o5c6plukk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
