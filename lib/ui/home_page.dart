@@ -92,50 +92,49 @@ class _HomePageState extends State<HomePage> {
                         case CubitState.failed:
                           return Column(
                             children: [
-                              Text('${_cubit.error}'),
+                              Text(
+                                  '${_cubit.nationalErr}\n\n${_cubit.provinceErr}'),
                               TextButton(
                                   onPressed: () => _cubit.fetchData(),
                                   child: Text(context.l10n.tryAgain)),
                             ],
                           );
                         case CubitState.success:
-                          Widget result =
-                              Center(child: Text(context.l10n.noData));
+                          List<Widget> children = [];
 
                           if (_cubit.national != null &&
                               _cubit.national!.isNotEmpty) {
-                            final national = _cubit.national!.single;
-                            result = Row(children: [
+                            final data = _cubit.national!.single;
+                            children.add(Row(children: [
                               CaseCard(
                                 title: context.l10n.death,
-                                value: national.deaths,
+                                value: data.deaths,
                                 cardMargin: const EdgeInsets.only(right: 8.0),
                                 labelBgColor: Colors.red,
                               ),
                               CaseCard(
                                 title: context.l10n.active,
-                                value: national.active,
+                                value: data.active,
                                 labelBgColor: Colors.amber[700],
                               ),
                               CaseCard(
                                 title: context.l10n.recovered,
-                                value: national.recovered,
+                                value: data.recovered,
                                 cardMargin: const EdgeInsets.only(left: 8.0),
                                 labelBgColor: Colors.green,
                               ),
-                            ]);
+                            ]));
                           }
 
                           if (_cubit.province != null &&
                               _cubit.province!.isNotEmpty) {
-                            result = Column(
-                              children: [
-                                result,
-                                CaseTable(data: _cubit.province!)
-                              ],
-                            );
+                            children.add(CaseTable(data: _cubit.province!));
                           }
-                          return result;
+
+                          if (children.isEmpty) {
+                            return Center(child: Text(context.l10n.noData));
+                          }
+                          return Column(children: children);
                       }
                     }
                     return Container();

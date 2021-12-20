@@ -50,7 +50,10 @@ class MyApp extends StatelessWidget {
         appBarTheme: themeData.appBarTheme.copyWith(
           backgroundColor: Colors.white,
           iconTheme: themeData.iconTheme.copyWith(color: Colors.black),
-          textTheme: themeData.textTheme.apply(bodyColor: Colors.black),
+          toolbarTextStyle:
+              themeData.textTheme.apply(bodyColor: Colors.black).bodyText2,
+          titleTextStyle:
+              themeData.textTheme.apply(bodyColor: Colors.black).headline6,
         ),
       ),
       darkTheme: ThemeData.dark(),

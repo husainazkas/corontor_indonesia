@@ -10,27 +10,36 @@ class HomeCubit extends Cubit<CubitState?> {
 
   final ApiCovid19 _apiCovid19 = ApiCovid19();
 
-  List<CovidNational>? national;
-  List<CovidProvince>? province;
-  String? error;
+  List<CovidNational>? _national;
+  List<CovidProvince>? _province;
+  String? nationalErr;
+  String? provinceErr;
+
+  List<CovidNational>? get national {
+    if (nationalErr != null) return null;
+    return _national;
+  }
+
+  List<CovidProvince>? get province {
+    if (provinceErr != null) return null;
+    return _province;
+  }
 
   void fetchData() async {
     emit(CubitState.loading);
     final national = await _apiCovid19.getNational();
-    if (national.error != null) {
-      error = national.error;
-      emit(CubitState.failed);
-      return;
-    }
+    nationalErr = national.error;
+
     final province = await _apiCovid19.getProvince();
-    if (province.error != null) {
-      error = province.error;
+    provinceErr = province.error;
+
+    if (nationalErr != null && provinceErr != null) {
       emit(CubitState.failed);
       return;
     }
 
-    this.national = national.data;
-    this.province = province.data;
+    this._national = national.data;
+    this._province = province.data;
     emit(CubitState.success);
   }
 }
